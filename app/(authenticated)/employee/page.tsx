@@ -275,7 +275,7 @@ export default async function DemoPage() {
   const data = await getData()
 
   return (
-    <div className="container mx-auto py-10 overflow-hidden">
+    <div className="overflow-hidden">
       <DataTable columns={columns} data={data} />
     </div>
   )
