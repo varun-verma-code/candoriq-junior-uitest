@@ -3,20 +3,26 @@ import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import React, { PropsWithChildren } from 'react'
 import { FiBriefcase } from 'react-icons/fi';
+import { HiOutlineUserGroup } from 'react-icons/hi';
 
 export const PAGES = [
+	{
+		label: 'Employees',
+    href: '/employee',
+    icon: HiOutlineUserGroup
+	},
   {
-    label: 'Job',
+    label: 'Jobs',
     href: '/job',
     icon: FiBriefcase
-  }
+  },
 ]
 
 const PageWithHeader = ({children, className} : PropsWithChildren<{className: string}>) => {
 	return (
 		<div className={cn('flex flex-col h-screen', className)}>
 			<PageHeader />
-			<div className='flex-1'>
+			<div className='flex-1 px-4'>
 				{children}
 			</div>
 		</div>

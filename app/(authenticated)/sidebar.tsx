@@ -8,12 +8,15 @@ import logo from  '/public/logo.png'
 import { usePathname } from "next/navigation";
 import { PAGES } from "./page-with-header";
 import { IconType } from "react-icons";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 const SidebarContext = createContext({expanded: false})
 
 export default function Sidebar({ children } : PropsWithChildren) {
   const [expanded, setExpanded] = useState(false)
   const currentPah = usePathname()
+
   return (
     <aside className="h-screen">
       <nav className={`h-full flex flex-col border-r shadow-sm ${expanded ? 'bg-white' : 'bg-primary'}`}>
@@ -30,12 +33,13 @@ export default function Sidebar({ children } : PropsWithChildren) {
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3">
+          <ul className="flex-1 px-3 mt-3">
             {PAGES.map((page) => (
               <SidebarItem
                 key={page.href}
                 icon={page.icon}
                 text={page.label}
+                href={page.href}
                 active={currentPah === page.href}
             />))}
           </ul>
@@ -85,32 +89,37 @@ export default function Sidebar({ children } : PropsWithChildren) {
   )
 }
 
-function SidebarItem({ icon: Icon, text, active, alert }: {
+function SidebarItem({ icon: Icon, text, href, active, alert }: {
 	icon: IconType
 	text: string
+  href: string
 	active?: boolean
 	alert?: boolean
 }) {
   const { expanded } = useContext(SidebarContext)
-  
+  const router = useRouter()
   return (
     <li
-      className={`
-        relative flex items-center py-2 px-3 my-1
-        font-medium rounded-md cursor-pointer
-        transition-colors group
-        ${
-          active
-            ? "bg-white"
-            : "hover:bg-indigo-50 text-gray-600"
-        }
-    `}
+      className={cn(
+        'relative flex items-center py-2 px-2 my-2',
+        'font-medium rounded-md cursor-pointer',
+        'transition-colors group',
+        active? "bg-white": "hover:bg-indigo-50 text-gray-600"
+      )}
+      onClick={() => {
+        router.push(href)
+      }}
     >
-      <Icon className={`text-2xl ${active?'text-highlight-foreground':'text-white'}`}/>
+      <Icon className={cn(
+        'text-2xl hover:text-highlight-foreground transition-colors',
+        active ?'text-highlight-foreground':'text-gray-600',
+        !active && !expanded ? 'text-white' : '')}/>
       <span
-        className={`overflow-hidden transition-all ${
-          expanded ? "w-48 ml-3" : "w-0"
-        }`}
+        className={cn(
+          'overflow-hidden transition-all hover:text-highlight-foreground',
+          expanded ? "w-48 ml-3" : "w-0",
+          active ? "text-highlight-foreground font-semibold" : "text-gray-500"
+        )}
       >
         {text}
       </span>
@@ -126,7 +135,7 @@ function SidebarItem({ icon: Icon, text, active, alert }: {
         <div
           className={`
           absolute left-full rounded-md px-2 py-1 ml-6
-          bg-indigo-100 text-indigo-800 text-sm
+          bg-secondary text-secondary-foreground text-sm
           invisible opacity-20 -translate-x-3 transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
       `}
