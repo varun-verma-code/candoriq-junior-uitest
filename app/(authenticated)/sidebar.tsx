@@ -20,7 +20,7 @@ export default function Sidebar({ children } : PropsWithChildren) {
 
   return (
     <aside className="h-screen">
-      <nav className={`h-full flex flex-col border-r shadow-sm ${expanded ? 'bg-white' : 'bg-primary'}`}>
+      <nav className={`h-full flex flex-col border-r shadow-sm ${expanded ? 'bg-white border-gray-200' : 'bg-primary'}`}>
         <div className="p-2 pb-2 flex gap-2 items-center">
           <Image
             src={logo}
@@ -46,7 +46,7 @@ export default function Sidebar({ children } : PropsWithChildren) {
           </ul>
         </SidebarContext.Provider>
 
-        <div className="border-t p-3">
+        <div className={`border-t p-3 ${expanded && 'border-gray-200'}`}>
           <SidebarContext.Provider value={{ expanded }}>
             <UserAvatar />
           </SidebarContext.Provider>
@@ -96,12 +96,12 @@ function SidebarItem({ icon: Icon, text, href, active, alert }: {
       }}
     >
       <Icon className={cn(
-        'text-2xl hover:text-highlight-foreground transition-colors',
+        'text-2xl transition-colors group-hover:text-highlight-foreground',
         active ?'text-highlight-foreground':'text-gray-600',
         !active && !expanded ? 'text-white' : '')}/>
       <span
         className={cn(
-          'overflow-hidden transition-all hover:text-highlight-foreground',
+          'overflow-hidden transition-all group-hover:text-highlight-foreground',
           expanded ? "w-40 ml-3" : "w-0",
           active ? "text-highlight-foreground font-semibold" : "text-gray-500"
         )}
