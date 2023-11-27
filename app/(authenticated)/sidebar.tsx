@@ -9,7 +9,7 @@ import logo from  '/public/logo.png'
 const SidebarContext = createContext({expanded: false})
 
 export default function Sidebar({ children } : PropsWithChildren) {
-  const [expanded, setExpanded] = useState(true)
+  const [expanded, setExpanded] = useState(false)
   
   return (
     <aside className="h-screen">
