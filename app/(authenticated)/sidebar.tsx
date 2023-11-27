@@ -1,5 +1,4 @@
 "use client";
-import { MoreVertical } from "lucide-react"
 import { useContext, createContext, useState, PropsWithChildren } from "react"
 import { MdArrowForward, MdArrowBack } from 'react-icons/md'
 import Image from 'next/image'
@@ -10,6 +9,8 @@ import { PAGES } from "./page-with-header";
 import { IconType } from "react-icons";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuGroup, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { createBrowserClient } from "@supabase/ssr";
 
 const SidebarContext = createContext({expanded: false})
 
@@ -46,26 +47,10 @@ export default function Sidebar({ children } : PropsWithChildren) {
         </SidebarContext.Provider>
 
         <div className="border-t p-3">
-          <div className="flex">
-            <img
-              src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
-              alt=""
-              className="w-10 h-10 rounded-md"
-            />
-            <div
-              className={`
-                flex justify-between items-center
-                overflow-hidden transition-all ${expanded ? "w-48 ml-3" : "w-0"}
-            `}
-            >
-              <div className="leading-4">
-                <h4 className="font-semibold">John Doe</h4>
-                <span className="text-xs text-gray-600">johndoe@gmail.com</span>
-              </div>
-              <MoreVertical size={20} />
-            </div>
-          </div>
-          <div className='mt-3 flex items-center gap-2'>
+          <SidebarContext.Provider value={{ expanded }}>
+            <UserAvatar />
+          </SidebarContext.Provider>
+          <div className='pl-1 mt-3 flex items-center gap-2'>
               <button 
                 className="inline-block py-0.5 border border-gray-300 rounded "
                 onClick={() => setExpanded((curr) => !curr)}>
@@ -117,7 +102,7 @@ function SidebarItem({ icon: Icon, text, href, active, alert }: {
       <span
         className={cn(
           'overflow-hidden transition-all hover:text-highlight-foreground',
-          expanded ? "w-48 ml-3" : "w-0",
+          expanded ? "w-40 ml-3" : "w-0",
           active ? "text-highlight-foreground font-semibold" : "text-gray-500"
         )}
       >
@@ -144,5 +129,51 @@ function SidebarItem({ icon: Icon, text, href, active, alert }: {
         </div>
       )}
     </li>
+  )
+}
+
+const UserAvatar = () => {
+  const { expanded } = useContext(SidebarContext)
+  const router = useRouter()
+  const signOut = async () => {
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+    supabase.auth.signOut()
+    router.push('/')
+  }
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <div className="flex">
+          <img
+            src="https://ui-avatars.com/api/?name=TU&background=c7d2fe&color=3730a3&bold=true"
+            alt=""
+            className="w-10 h-10 rounded-full"
+          />
+          <div
+            className={`
+              flex justify-between items-center
+              overflow-hidden transition-all ${expanded ? "w-40 ml-3" : "w-0"}
+          `}
+          >
+            <div className="leading-4">
+              <h4>Test User</h4>
+            </div>
+          </div>
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent 
+        className={cn(
+          "w-40 border border-primary",
+          expanded ? '' : 'ml-6')}>
+        <DropdownMenuGroup className="hover:bg-gray-400 focus:bg-gray-400">
+          <DropdownMenuItem onClick={signOut}>
+            Signout
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
