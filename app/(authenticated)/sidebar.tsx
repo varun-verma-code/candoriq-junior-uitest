@@ -1,6 +1,10 @@
 "use client";
-import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react"
+import { MoreVertical } from "lucide-react"
 import { useContext, createContext, useState, PropsWithChildren } from "react"
+import { MdArrowForward, MdArrowBack } from 'react-icons/md'
+import Image from 'next/image'
+import logo_long from '/public/logo_long.png'
+import logo from  '/public/logo.png'
 
 const SidebarContext = createContext({expanded: false})
 
@@ -9,44 +13,60 @@ export default function Sidebar({ children } : PropsWithChildren) {
   
   return (
     <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-white border-r shadow-sm">
-        <div className="p-4 pb-2 flex justify-between items-center">
-          <img
-            src="https://img.logoipsum.com/243.svg"
-            className={`overflow-hidden transition-all ${
-              expanded ? "w-32" : "w-0"
-            }`}
-            alt=""
+      <nav className={`h-full flex flex-col border-r shadow-sm ${expanded ? 'bg-white' : 'bg-primary'}`}>
+        <div className="p-2 pb-2 flex gap-2 items-center">
+          <Image
+            src={logo}
+            height={40}
+            className="ml-1 inline bg-white rounded-md"
+            alt="CandorIQ Logo"
           />
-          <button
-            onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
-          >
-            {expanded ? <ChevronFirst /> : <ChevronLast />}
-          </button>
+          <div
+            className={`${expanded ? '' : 'hidden'}`}
+          >CandorIQ</div>
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3">{children}</ul>
         </SidebarContext.Provider>
 
-        <div className="border-t flex p-3">
-          <img
-            src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
-            alt=""
-            className="w-10 h-10 rounded-md"
-          />
-          <div
-            className={`
-              flex justify-between items-center
-              overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}
-          `}
-          >
-            <div className="leading-4">
-              <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+        <div className="border-t p-3">
+          <div className="flex">
+            <img
+              src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
+              alt=""
+              className="w-10 h-10 rounded-md"
+            />
+            <div
+              className={`
+                flex justify-between items-center
+                overflow-hidden transition-all ${expanded ? "w-48 ml-3" : "w-0"}
+            `}
+            >
+              <div className="leading-4">
+                <h4 className="font-semibold">John Doe</h4>
+                <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+              </div>
+              <MoreVertical size={20} />
             </div>
-            <MoreVertical size={20} />
+          </div>
+          <div className='mt-3 flex items-center gap-2'>
+              <button 
+                className="inline-block py-0.5 border border-gray-300 rounded "
+                onClick={() => setExpanded((curr) => !curr)}>
+                {expanded ?  
+                <MdArrowBack className="text-xl mx-1 text-gray-600 duration-300" /> :
+                <MdArrowForward className="text-xl mx-1 text-white duration-300" />}
+              </button>
+              <h3 className={`text-xs font-normal text-center text-gray-700 ${expanded ? 'block' : 'hidden'} whitespace-nowrap`}>
+                <span>Powered by </span>
+                <Image
+                  src={logo_long}
+                  height={16}
+                  className="ml-1 inline"
+                  alt="CandorIQ Logo"
+                />
+            </h3>
           </div>
         </div>
       </nav>
@@ -78,7 +98,7 @@ export function SidebarItem({ icon, text, active, alert }: {
       {icon}
       <span
         className={`overflow-hidden transition-all ${
-          expanded ? "w-52 ml-3" : "w-0"
+          expanded ? "w-48 ml-3" : "w-0"
         }`}
       >
         {text}
