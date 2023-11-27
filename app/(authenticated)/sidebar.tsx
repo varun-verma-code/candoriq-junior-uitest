@@ -5,12 +5,15 @@ import { MdArrowForward, MdArrowBack } from 'react-icons/md'
 import Image from 'next/image'
 import logo_long from '/public/logo_long.png'
 import logo from  '/public/logo.png'
+import { usePathname } from "next/navigation";
+import { PAGES } from "./page-with-header";
+import { IconType } from "react-icons";
 
 const SidebarContext = createContext({expanded: false})
 
 export default function Sidebar({ children } : PropsWithChildren) {
   const [expanded, setExpanded] = useState(false)
-  
+  const currentPah = usePathname()
   return (
     <aside className="h-screen">
       <nav className={`h-full flex flex-col border-r shadow-sm ${expanded ? 'bg-white' : 'bg-primary'}`}>
@@ -27,7 +30,15 @@ export default function Sidebar({ children } : PropsWithChildren) {
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3">{children}</ul>
+          <ul className="flex-1 px-3">
+            {PAGES.map((page) => (
+              <SidebarItem
+                key={page.href}
+                icon={page.icon}
+                text={page.label}
+                active={currentPah === page.href}
+            />))}
+          </ul>
         </SidebarContext.Provider>
 
         <div className="border-t p-3">
@@ -74,8 +85,8 @@ export default function Sidebar({ children } : PropsWithChildren) {
   )
 }
 
-export function SidebarItem({ icon, text, active, alert }: {
-	icon: React.ReactNode
+function SidebarItem({ icon: Icon, text, active, alert }: {
+	icon: IconType
 	text: string
 	active?: boolean
 	alert?: boolean
@@ -90,12 +101,12 @@ export function SidebarItem({ icon, text, active, alert }: {
         transition-colors group
         ${
           active
-            ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
+            ? "bg-white"
             : "hover:bg-indigo-50 text-gray-600"
         }
     `}
     >
-      {icon}
+      <Icon className={`text-2xl ${active?'text-highlight-foreground':'text-white'}`}/>
       <span
         className={`overflow-hidden transition-all ${
           expanded ? "w-48 ml-3" : "w-0"

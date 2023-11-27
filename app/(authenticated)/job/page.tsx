@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 import AccountForm from '@/app/(authenticated)/job/_components/account-form'
 import { createServerClient } from '@supabase/ssr'
 
-export default async function Account() {
+export default async function Job() {
   const cookieStore = cookies()
 
   const supabase = createServerClient(
@@ -21,6 +21,6 @@ export default async function Account() {
   const {
     data: { session },
   } = await supabase.auth.getSession()
-
+  
   return <AccountForm session={session} />
 }

@@ -1,3 +1,4 @@
+import PageWithHeader from "./page-with-header"
 import Sidebar from "./sidebar"
 
 export default function Layout({
@@ -7,9 +8,11 @@ export default function Layout({
 }) {
   return (
     <section className="flex">
-      {/* Include shared UI here e.g. a header or sidebar */}
-      <Sidebar></Sidebar>
-      {children}
+      <Sidebar/>
+      <PageWithHeader className='flex-1'>
+        {children}
+      </PageWithHeader>
     </section>
   )
 }
+
