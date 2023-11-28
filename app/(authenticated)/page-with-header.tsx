@@ -20,9 +20,9 @@ export const PAGES = [
 
 const PageWithHeader = ({children, className} : PropsWithChildren<{className: string}>) => {
 	return (
-		<div className={cn('flex flex-col h-screen', className)}>
+		<div className={cn('flex flex-col h-[100vh]', className)}>
 			<PageHeader />
-			<div className='flex-1 px-4'>
+			<div className='flex-1 px-4 overflow-auto'>
 				{children}
 			</div>
 		</div>
