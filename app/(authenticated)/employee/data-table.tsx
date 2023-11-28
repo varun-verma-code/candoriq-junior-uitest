@@ -34,10 +34,9 @@ export function DataTable<TData, TValue>({
 
 
   return (
-    <div className="rounded-md border-y border-gray-200 overflow-auto">
-			<div className='h-[63vh] w-[85vw] relative overflow=auto'>
+    <div className="rounded-md border-y border-gray-200 overflow-auto h-[63vh] w-[90vw] relative bg-secondary">
 				<Table>
-					<TableHeader className='sticky top-0'>
+					<TableHeader className='sticky top-0 z-10'>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow className='border-b-1 border-gray-200' key={headerGroup.id}>
 								{headerGroup.headers.map((header, index) => {
@@ -84,7 +83,6 @@ export function DataTable<TData, TValue>({
 						)}
 					</TableBody>
 				</Table>
-			</div>
     </div>
   )
 }

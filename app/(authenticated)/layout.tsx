@@ -8,12 +8,12 @@ export default function Layout({
   children: React.ReactNode
 }) {
   return (
-      <section className="flex h-full">
+      <main className="w-[100vw] flex h-full overflow-hidden">
         <Sidebar/>
-        <PageWithHeader className='flex-1'>
+        <PageWithHeader className='flex-1 overflow-hidden'>
           {children}
         </PageWithHeader>
-      </section>
+      </main>
   )
 }
 

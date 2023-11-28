@@ -271,11 +271,11 @@ async function getData(): Promise<Employee[]> {
   ]  
 }
 
-export default async function DemoPage() {
+export default async function EmployeePage() {
   const data = await getData()
 
   return (
-    <div className="overflow-hidden">
+    <div className="flex overflow-hidden justify-center">
       <DataTable columns={columns} data={data} />
     </div>
   )
