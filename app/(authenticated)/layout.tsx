@@ -1,4 +1,3 @@
-import { Container } from "lucide-react"
 import PageWithHeader from "./page-with-header"
 import Sidebar from "./sidebar"
 

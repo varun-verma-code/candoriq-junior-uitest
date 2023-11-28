@@ -1,5 +1,4 @@
 "use client";
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import React, { PropsWithChildren } from 'react'
