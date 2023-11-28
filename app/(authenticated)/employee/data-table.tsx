@@ -34,11 +34,11 @@ export function DataTable<TData, TValue>({
 
 
   return (
-    <div className="rounded-md border-y border-gray-200 overflow-auto h-[63vh] w-[90vw] relative bg-secondary scroll-auto">
+    <div className="rounded-md border-y overflow-auto h-[63vh] w-[90vw] relative bg-secondary scroll-auto">
 				<Table>
 					<TableHeader className='sticky top-0 z-10'>
 						{table.getHeaderGroups().map((headerGroup) => (
-							<TableRow className='border-b-1 border-gray-200' key={headerGroup.id}>
+							<TableRow className='border-b-1' key={headerGroup.id}>
 								{headerGroup.headers.map((header, index) => {
 									return (
 										<TableHead 
