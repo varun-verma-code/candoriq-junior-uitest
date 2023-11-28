@@ -20,7 +20,7 @@ export default function Sidebar({ children } : PropsWithChildren) {
 
   return (
     <aside className="h-screen">
-      <nav className={`h-full flex flex-col border-r shadow-sm ${expanded ? 'bg-white border-gray-200' : 'bg-primary'}`}>
+      <nav className={`h-full flex flex-col border-r shadow-sm ${expanded ? 'bg-white' : 'bg-primary'}`}>
         <div className="p-2 pb-2 flex gap-2 items-center">
           <Image
             src={logo}
@@ -46,7 +46,7 @@ export default function Sidebar({ children } : PropsWithChildren) {
           </ul>
         </SidebarContext.Provider>
 
-        <div className={`border-t p-3 ${expanded && 'border-gray-200'}`}>
+        <div className={`border-t p-3`}>
           <SidebarContext.Provider value={{ expanded }}>
             <UserAvatar />
           </SidebarContext.Provider>
@@ -153,9 +153,9 @@ const UserAvatar = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         className={cn(
-          "w-40 border border-primary",
+          "w-40 border",
           expanded ? '' : 'ml-6')}>
-        <DropdownMenuGroup className="hover:bg-gray-400 focus:bg-gray-400">
+        <DropdownMenuGroup>
           <DropdownMenuItem onClick={signOut}>
             Signout
           </DropdownMenuItem>
