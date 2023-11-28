@@ -9,37 +9,116 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      profiles: {
+      departments: {
         Row: {
-          avatar_url: string | null
-          full_name: string | null
+          created_at: string
           id: string
-          updated_at: string | null
-          username: string | null
-          website: string | null
+          name: string
         }
         Insert: {
-          avatar_url?: string | null
-          full_name?: string | null
-          id: string
-          updated_at?: string | null
-          username?: string | null
-          website?: string | null
+          created_at?: string
+          id?: string
+          name: string
         }
         Update: {
-          avatar_url?: string | null
-          full_name?: string | null
+          created_at?: string
           id?: string
-          updated_at?: string | null
-          username?: string | null
-          website?: string | null
+          name?: string
+        }
+        Relationships: []
+      }
+      employees: {
+        Row: {
+          bonus: number
+          created_at: string
+          department_id: string
+          email: string | null
+          equity: number
+          first_name: string
+          id: string
+          job_id: string
+          last_name: string
+          manager_id: string | null
+          salary: number
+          start_date: string
+        }
+        Insert: {
+          bonus?: number
+          created_at?: string
+          department_id: string
+          email?: string | null
+          equity?: number
+          first_name: string
+          id?: string
+          job_id: string
+          last_name: string
+          manager_id?: string | null
+          salary?: number
+          start_date: string
+        }
+        Update: {
+          bonus?: number
+          created_at?: string
+          department_id?: string
+          email?: string | null
+          equity?: number
+          first_name?: string
+          id?: string
+          job_id?: string
+          last_name?: string
+          manager_id?: string | null
+          salary?: number
+          start_date?: string
         }
         Relationships: [
           {
-            foreignKeyName: "profiles_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
+            foreignKeyName: "employees_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "employees_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "employees_manager_id_fkey"
+            columns: ["manager_id"]
+            isOneToOne: false
+            referencedRelation: "employees"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      jobs: {
+        Row: {
+          created_at: string
+          department_id: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          department_id: string
+          id?: string
+          name?: string
+        }
+        Update: {
+          created_at?: string
+          department_id?: string
+          id?: string
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jobs_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
             referencedColumns: ["id"]
           }
         ]
@@ -49,7 +128,55 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      citext:
+        | {
+            Args: {
+              "": boolean
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              "": string
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              "": unknown
+            }
+            Returns: string
+          }
+      citext_hash: {
+        Args: {
+          "": string
+        }
+        Returns: number
+      }
+      citextin: {
+        Args: {
+          "": unknown
+        }
+        Returns: string
+      }
+      citextout: {
+        Args: {
+          "": string
+        }
+        Returns: unknown
+      }
+      citextrecv: {
+        Args: {
+          "": unknown
+        }
+        Returns: string
+      }
+      citextsend: {
+        Args: {
+          "": string
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
