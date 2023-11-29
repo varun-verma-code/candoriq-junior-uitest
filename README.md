@@ -34,3 +34,33 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+### Summary 
+This test utilizes Next.js, Supabase (backend as a service), React, Typescript, ShadCN, TailwindCSS, Tanstack React Table, and React Hook Form. 
+You have the freedom to employ all available resources within the 3-hour time limit. Aim to accomplish as much as possible within this timeframe; completion of all tasks is not mandatory. 
+The test is open, allowing you to choose your approach. You may utilize any of the specified technologies but are restricted from introducing new ones. 
+The grading will primarily focus on the functionality and quality of your code. While completing more tasks is beneficial, what we're focused on is the quality and readability of your code. 
+Ensure a thorough quality check before proceeding to the next task. Bonus points will be awarded for exceptional TailwindCSS usage and visual design. *Do these tasks in order.* 
+
+Once finshed, compress the folder into a zip file and rename it to your first and last name. (i.e. firstName_lastName.zip)  
+Email it to (some email)
+
+### Setup 
+- npm install
+  - need to have npm and git installed
+- create a git branch or just send it by email by compressing it
+- add .env.local keys 
+- npm run dev
+- go to [http://localhost:3000/] in your browser
+- use the side panel to navigate between pages
+
+
+### Tasks (Do these Tasks in Order)
+- make the table sortable by column
+- add a new column
+- add a toggle switch to convert between between bonus percent and bonus absolutes
+- add a search box to find specific jobs / people
+- add new column to table that contains a button to open a detail page with the details of that specific job
+  - use NextJS router with the id of the job in the url 
+- make detail page editable so that when you update, the new information will be printed to the console
