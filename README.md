@@ -1,66 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Evaluation Instructions
 
-## Getting Started
+## Prereqs
+- Must have npm and git 
 
-First, run the development server:
+## Overview:
+This test is designed to assess your skills using a stack that includes Next.js, Supabase (backend as a service), React, Typescript, ShadCN, TailwindCSS, Tanstack React Table, and React Hook Form. The tasks closely mirror the responsibilities expected for this role at CandorIQ.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Guidelines:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Time Limit:** The evaluation has a 3-hour time limit, and you are encouraged to leverage all available resources within this timeframe.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Flexibility:** Feel free to leverage any available resources. Use any of the specified technologies, but avoid introducing new ones.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. **Grading Focus:** The primary focus during grading will be on the functionality and quality of your code. While completing more tasks is advantageous, emphasis is placed on the quality, efficiency, and readability of your code.
 
-## Learn More
+4. **Quality Check:** Before progressing to the next task, ensure a thorough quality check of your code. Attention to detail is crucial.
 
-To learn more about Next.js, take a look at the following resources:
+5. **Brownie Points:** Exceptional usage of TailwindCSS and attention to visual design will be rewarded with bonus points.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-
-### Summary 
-This test utilizes Next.js, Supabase (backend as a service), React, Typescript, ShadCN, TailwindCSS, Tanstack React Table, and React Hook Form. 
-You have the freedom to employ all available resources within the 3-hour time limit. Aim to accomplish as much as possible within this timeframe; completion of all tasks is not mandatory. 
-The test is open, allowing you to choose your approach. You may utilize any of the specified technologies but are restricted from introducing new ones. 
-The grading will primarily focus on the functionality and quality of your code. While completing more tasks is beneficial, what we're focused on is the quality and readability of your code. 
-Ensure a thorough quality check before proceeding to the next task. Bonus points will be awarded for exceptional TailwindCSS usage and visual design. *Do these tasks in order.* 
-
-Once finshed, compress the folder into a zip file and rename it to your first and last name. (i.e. firstName_lastName.zip)  
-Email it to (some email)
+## Task Order
+Please complete the tasks in the specified order. **Completion of all tasks is not mandatory. Get as much done as possible.**
 
 ### Setup 
-- npm install
-  - need to have npm and git installed
-- create a git branch or just send it by email by compressing it
-- add .env.local keys 
-- npm run dev
-- go to [http://localhost:3000/] in your browser
-- use the side panel to navigate between pages
-
+1. Run `npm install` in your terminal.
+2. Create a `.env.local` file in the root folder and copy and paste the keys provided in the email.
+3. Run `npm run dev` in your terminal to start the server.
+4. Go to [http://localhost:3000/](http://localhost:3000/) in your browser.
+5. Use 'sthavisomboon@candoriq.com' as the email and '123456' as the password to log in.
+6. After completion, submit by email after compressing the folder into a zip file.
 
 ### Tasks (Do these Tasks in Order)
-- make the table sortable by column
-- add a new column
-- add a toggle switch to convert between between bonus percent and bonus absolutes
-- add a search box to find specific jobs / people
-- add new column to table that contains a button to open a detail page with the details of that specific job
-  - use NextJS router with the id of the job in the url 
-- make detail page editable so that when you update, the new information will be printed to the console
+After logging in, you will see a side panel with two icons. These will navigate you to the 'Employees' and 'Jobs' pages. In both pages, you will see a table with either employee or job data. 
+You can find the page data in the app folder. You are free to use any of the pre-built components in the components folder. 
+
+1. Add 2 new columns to the employees table 
+   - Add 'salary' and 'bonus' columns.
+   - Make sure to format them in USD.
+   
+2. Make the 'name' and 'salary' columns in the employees table sortable.
+
+3. Add a toggle switch to convert between bonus percent and bonus in dollars for the employees table.
+   - Bonus percent is calculated using `(bonus / salary)`.
+
+4. Add a search box to find specific jobs/people in both employees and jobs tables.
+
+5. Add a new column to the jobs table that contains a button to open a details page with a table listing all employees who have that job.
+   - Hint: A new query needs to be written for this.

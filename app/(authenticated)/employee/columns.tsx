@@ -34,22 +34,6 @@ export const columns: ColumnDef<Employee>[] = [
     accessorKey: "department",
     header: "Department",
   },
-  {
-    accessorKey: "salary",
-    header: () => (<TextRightHeader>Salary</TextRightHeader>),
-		cell: ({ row }) => {
-      const salary = parseFloat(row.getValue("salary"))
-			return getCurrencyCell(salary)
-    },
-  },
-	{
-    accessorKey: "bonus",
-    header: () => (<TextRightHeader>Bonus</TextRightHeader>),
-		cell: ({ row }) => {
-      const bonus = parseFloat(row.getValue("bonus"))
-			return getCurrencyCell(bonus)
-    },
-  },
 	{
     accessorKey: "equity",
     header:  () => (<TextRightHeader>Equity</TextRightHeader>),
