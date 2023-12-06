@@ -8,7 +8,7 @@ This test is designed to assess your skills using a stack that includes Next.js,
 
 ## Guidelines:
 
-1. **Time Limit:** The evaluation has a 3-hour time limit, and you are encouraged to leverage all available resources within this timeframe.
+1. **Time Suggestion** The exercise shouldn't take you more than 3-hour to finish and you are encouraged to leverage all available resources within this timeframe.
 
 2. **Flexibility:** Feel free to leverage any available resources. Use any of the specified technologies, but avoid introducing new ones.
 

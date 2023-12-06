@@ -56,14 +56,6 @@ function TextRightHeader ({children, className} : PropsWithChildren<{className?:
 	return (<div className={cn(className, 'text-right')}>{children}</div>)
 }
 
-function getCurrencyCell(value: number) {
-	const formatted = new Intl.NumberFormat("en-US", {
-		style: "currency",
-		currency: "USD",
-	}).format(value)
-	return <TextRightHeader className="font-medium">{formatted}</TextRightHeader>
-}
-
 function getNumberCell(value: number) {
 	const formatted = new Intl.NumberFormat("en-US").format(value)
 	return <TextRightHeader className="font-medium">{formatted}</TextRightHeader>
