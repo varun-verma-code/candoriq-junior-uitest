@@ -26,7 +26,7 @@ Please complete the tasks in the specified order. **Completion of all tasks is n
 2. Create a `.env.local` file in the root folder and copy and paste the keys provided in the email.
 3. Run `npm run dev` in your terminal to start the server.
 4. Go to [http://localhost:3000/](http://localhost:3000/) in your browser.
-5. Use 'sthavisomboon@candoriq.com' as the email and '123456' as the password to log in.
+5. Use 'uitest@candoriq.com' as the email and use password provided in your instruction email.
 6. After completion, submit by email after compressing the folder into a zip file.
 
 ### Tasks (Do these Tasks in Order)

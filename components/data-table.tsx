@@ -34,7 +34,7 @@ export function DataTable<TData, TValue>({
 
 
   return (
-    <div className="rounded-md border-y overflow-auto h-[63vh] w-[90vw] relative bg-secondary scroll-auto">
+    <div className="rounded-md border-y overflow-auto h-[63vh] w-[90vw] relative scroll-auto">
 				<Table>
 					<TableHeader className='sticky top-0 z-10'>
 						{table.getHeaderGroups().map((headerGroup) => (
@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
 										return (
 											<TableCell 
 												key={cell.id}
-												className={`${index === 0 ? 'sticky left-0' : ''} bg-secondary`}>
+												className={`${index === 0 ? 'sticky left-0' : ''} bg-white`}>
 												{flexRender(cell.column.columnDef.cell, cell.getContext())}
 											</TableCell>
 										)})}
