@@ -33,7 +33,7 @@ export default function AuthForm({ className, ...props }: AuthFormProps) {
       setIsLoading(false)
       if (error) alert(error.message);
       // push to home page
-      router.push("/job");
+      router.push("/employee");
     })
 
   return (
