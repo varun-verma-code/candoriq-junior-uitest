@@ -26,20 +26,24 @@ abilities.
 4. **Quality Check:** Before progressing to the next task, ensure a thorough
    quality check of your code. Attention to detail is crucial.
 
+### Supabase Setup
+
+1. Follow supabase setup instructions here =>
+   [https://supabase.com/docs/guides/local-development/cli/getting-started](https://supabase.com/docs/guides/local-development/cli/getting-started)
+2. To start supabase run `supabase start` in your terminal
+3. To run sql migrations and seed the database run `supabase db reset`
+
 ### Setup
 
-1. Run `npm install` in your terminal.
-2. Open docker
-3. Run `supabase start` in your terminal
-4. Create a `.env.local` file in the root folder and copy and paste the keys
-   provided in the email and add the following 2 keys
+1. Install all dependencies by running `npm install`
+2. Link the NextJS application to local Supabase by creating a `.env.local` file
+   in the root folder and adding the following 2 keys
    - `NEXT_PUBLIC_SUPABASE_URL="http://localhost:64321"`
-   - Get the value for this key from `supabase status` under anon key:
-     `NEXT_PUBLIC_SUPABASE_ANON_KEY="{insert anon key}"`
-5. Run `supabase db reset` to run sql migrations and seed the database
-6. Run `npm run dev` in your terminal to start the server.
-7. Go to [http://localhost:3000/](http://localhost:3000/) in your browser.
-8. After completion, submit by email after compressing the folder into a zip
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY="{insert anon key}"` (You can get the anon
+     key by running `supabase status`)
+3. Run `npm run dev` in your terminal to start your application.
+4. Go to [http://localhost:3000/](http://localhost:3000/) in your browser.
+5. After completion, submit by email after compressing the folder into a zip
    file.
 
 ### Task
@@ -53,9 +57,8 @@ management hierarchy.
 For example, David Anderson should be able to see Alice Johnson, as he is her
 manager, and also Jessica White, as Alice is Jessica's manager. However, David
 should not be able to see John Doe, who is his own manager. Ensure that the
-access control works correctly for two specified accounts, but ideally, this
-restriction should apply to all employees, regardless of whether or not they
-have accounts.
+access control works correctly for two specific accounts, David Anderson and
+Emma Williams.
 
 ### Account Credentials:
 
