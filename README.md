@@ -13,17 +13,13 @@ abilities.
 
 ## Guidelines:
 
-1. **Time Suggestion** The exercise shouldn't take you more than 3-hour to
-   finish and you are encouraged to leverage all available resources within this
-   timeframe.
-
-2. **Flexibility:** Feel free to leverage any available resources. Use any of
+1. **Flexibility:** Feel free to leverage any available resources. Use any of
    the specified technologies, but avoid introducing new ones.
 
-3. **Grading Focus:** The primary focus during grading will be on the
+2. **Grading Focus:** The primary focus during grading will be on the
    functionality and quality of your code.
 
-4. **Quality Check:** Before progressing to the next task, ensure a thorough
+3. **Quality Check:** Before progressing to the next task, ensure a thorough
    quality check of your code. Attention to detail is crucial.
 
 ### Supabase Setup
