@@ -45,6 +45,7 @@ abilities.
 4. Go to [http://localhost:3000/](http://localhost:3000/) in your browser.
 5. After completion, submit by email after compressing the folder into a zip
    file.
+6. Access the supabase ui [http://localhost:64323/](http://localhost:64323/)
 
 ### Task
 
@@ -56,9 +57,11 @@ management hierarchy.
 
 For example, David Anderson should be able to see Alice Johnson, as he is her
 manager, and also Jessica White, as Alice is Jessica's manager. However, David
-should not be able to see John Doe, who is his own manager. Ensure that the
-access control works correctly for two specific accounts, David Anderson and
-Emma Williams.
+should not be able to see John Doe, who is his own manager and he should not see
+himself. Ensure that the access control works correctly for two specific
+accounts, David Anderson and Emma Williams. Access shouldn’t be limited only at
+UI but also at the API level as Supabase automatically creates API routes for
+all tables in the public schema.
 
 ### Account Credentials:
 
