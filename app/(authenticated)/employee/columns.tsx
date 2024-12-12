@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils"
 import { ColumnDef } from "@tanstack/react-table"
 import { PropsWithChildren } from "react"
+import { CustomColumnDef } from "@/types/custom-col-def"
 
 export type Employee = {
   id: string
@@ -17,7 +18,7 @@ export type Employee = {
 	equity: number
 }
 
-export const columns: ColumnDef<Employee>[] = [
+export const columns: CustomColumnDef<Employee, any>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -65,6 +66,7 @@ export const columns: ColumnDef<Employee>[] = [
 			return getCurrencyCell(salary)
     },
     enableSorting: true,
+    headerAlignment: "right",
   },
 	{
     accessorKey: "bonus",

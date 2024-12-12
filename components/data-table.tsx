@@ -2,6 +2,7 @@
 
 import { LiaSortSolid, LiaSortUpSolid, LiaSortDownSolid } from "react-icons/lia";
 import React from "react"
+import { CustomColumnDef } from "@/types/custom-col-def";
 
 import {
   ColumnDef,
@@ -22,18 +23,17 @@ import {
 } from "@/components/ui/table"
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
+  columns: CustomColumnDef<TData, TValue>[]
   data: TData[]
 }
 
 /*
-The DataTable is dynamically sorted.
-In order to sort data by a column, set the enableSorting property for colum to true
-The column will dynamically get the styles (pointer, icon) to signify sortable and order or sort
-
-TODO: 
-=====
-1. The header should dynamically be right or left justified based on typeof value
+Features and Usage
+==================
+1. The DataTable is dynamically sorted.
+2. In order to sort data by a column, set the enableSorting property for colum to true
+3. The column will dynamically get the styles (pointer, icon) to signify sortable and order or sort
+4. The header will dynamically be right or left justified based on the ColumnDef headerAlignment, left justified by default
 */
 export function DataTable<TData, TValue>({
   columns,
@@ -100,7 +100,14 @@ export function DataTable<TData, TValue>({
 											{header.isPlaceholder ? null : (
 												// If column is sortable, then assign toggleSortingHandler on-click, and CSS styles
 												<div {...(header.column.getCanSort() ? 
-															{onClick: header.column.getToggleSortingHandler(), className:`flex cursor-pointer`}	// TODO: Adjust header alignment for sorted columns
+															{onClick: header.column.getToggleSortingHandler(), className:`flex cursor-pointer items-center
+																${header.column.columnDef?.headerAlignment === "right"
+																	? "justify-end"
+																	: header.column.columnDef?.headerAlignment === "center"
+																	? "justify-center"
+																	: "justify-start"
+																}
+																`}	// Justify headers based on column def, or justify-start/left by default
 															: {}
 														)}
 												>
@@ -112,9 +119,9 @@ export function DataTable<TData, TValue>({
 												{header.column.getCanSort() && (
 															<div className="">
 																{{
-																	false: <LiaSortSolid className="align-bottom" />,
-																	asc: <LiaSortUpSolid className="inline-flex" />,
-																	desc: <LiaSortDownSolid className="inline-flex" />,
+																	false: <LiaSortSolid />,
+																	asc: <LiaSortUpSolid />,
+																	desc: <LiaSortDownSolid />,
 																}[header.column.getIsSorted() as string] ?? null}
 															</div>
 												)}
