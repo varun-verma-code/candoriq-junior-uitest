@@ -64,7 +64,7 @@ export function DataTable<TData, TValue>({
 
 
   return (
-		<div>
+		<div className="min-w-full min-h-screen">
 			<div className="flex items-center"> {/* Container for the Search input and toggle button */}
 				<input type="text" value={globalFilter} placeholder="Search..." className="border rounded px-3 py-2 w-1/5 m-2"
 					onChange={(e) => table.setGlobalFilter(String(e.target.value))}
@@ -90,7 +90,7 @@ export function DataTable<TData, TValue>({
 					</div>
 				) : null}
 			</div>
-			<div className="rounded-md border-y overflow-auto h-[63vh] w-[90vw] relative scroll-auto"> {/* Container for the display table */}
+			<div className="rounded-md border-y overflow-auto relative scroll-auto"> {/* Container for the display table */}
 				<Table>
 					<TableHeader className='sticky top-0 z-10'>
 						{table.getHeaderGroups().map((headerGroup) => (
