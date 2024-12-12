@@ -7,6 +7,7 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
@@ -42,25 +43,33 @@ export function DataTable<TData, TValue>({
 	const [columnVisibility, setColumnVisibility] = React.useState({
     bonus_percent: false, // Default visibility set to false
   });
+	const [globalFilter, setGlobalFilter] = React.useState(""); // Track search input
   const table = useReactTable({
     data,
     columns,
     state: {
       sorting,
 			columnVisibility,
+			globalFilter,
     },
     onSortingChange: setSorting,
 		onColumnVisibilityChange: setColumnVisibility,
+		onGlobalFilterChange: setGlobalFilter,
     getSortedRowModel: getSortedRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
+    globalFilterFn: "includesString",
   })
 
 
 
   return (
     <div className="rounded-md border-y overflow-auto h-[63vh] w-[90vw] relative scroll-auto">
+				<input type="text" value={globalFilter} placeholder="Search..." className="border rounded px-3 py-2 w-1/5 m-2"
+					onChange={(e) => table.setGlobalFilter(String(e.target.value))}
+				/>
 				{table.getColumn("bonus") ? (
-					<div className="pt-2 pl-2">
+					<div className="inline-block p-2 h-10 align-middle">
 						<label className="inline-flex items-center cursor-pointer">
 							<input type="checkbox" value="" className="sr-only peer"
 								onClick={() => {
