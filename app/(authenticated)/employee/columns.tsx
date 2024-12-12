@@ -74,6 +74,13 @@ export const columns: ColumnDef<Employee>[] = [
 			return getCurrencyCell(salary)
     },
     enableSorting: false,
+  },
+  {
+    id: "bonus_percent",
+    header: "Bonus %",
+    accessorFn: (row) => ((row.bonus / row.salary) * 100).toFixed(2),
+    cell: ({getValue}) => `${getValue()}%`,
+    enableSorting: false,    
   }
 ]
 

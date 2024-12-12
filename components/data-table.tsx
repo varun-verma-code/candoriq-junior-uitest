@@ -39,13 +39,18 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = React.useState([])
+	const [columnVisibility, setColumnVisibility] = React.useState({
+    bonus_percent: false, // Default visibility set to false
+  });
   const table = useReactTable({
     data,
     columns,
     state: {
       sorting,
+			columnVisibility,
     },
     onSortingChange: setSorting,
+		onColumnVisibilityChange: setColumnVisibility,
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
   })
@@ -54,6 +59,26 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md border-y overflow-auto h-[63vh] w-[90vw] relative scroll-auto">
+				{table.getColumn("bonus") ? (
+					<div className="pt-2 pl-2">
+						<label className="inline-flex items-center cursor-pointer">
+							<input type="checkbox" value="" className="sr-only peer"
+								onClick={() => {
+									const bonusCol = table.getColumn("bonus")
+									const bonusPercentCol = table.getColumn("bonus_percent")
+									if (bonusPercentCol) {
+										bonusPercentCol.getIsVisible() ? bonusPercentCol.toggleVisibility(false) : bonusPercentCol.toggleVisibility(true)
+									}
+									if (bonusCol) {
+										bonusCol.getIsVisible() ? bonusCol.toggleVisibility(false) : bonusCol.toggleVisibility(true)
+									}
+								}}							
+							/>
+							<div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+							<span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Bonus %</span>
+						</label>
+					</div>
+				) : null}
 				<Table>
 					<TableHeader className='sticky top-0 z-10'>
 						{table.getHeaderGroups().map((headerGroup) => (
@@ -66,7 +91,7 @@ export function DataTable<TData, TValue>({
 											{header.isPlaceholder ? null : (
 												// If column is sortable, then assign toggleSortingHandler on-click, and CSS styles
 												<div {...(header.column.getCanSort() ? 
-															{onClick: header.column.getToggleSortingHandler(), className:`flex justify-center cursor-pointer`}
+															{onClick: header.column.getToggleSortingHandler(), className:`flex cursor-pointer`}	// TODO: Adjust header alignment for sorted columns
 															: {}
 														)}
 												>
