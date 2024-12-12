@@ -26,10 +26,13 @@ type JoinedEmployee = EmployeeTable & {
   }
 }
 
-async function getEmployeeData(): Promise<Employee[]> {
+async function getEmployeeData(jobId : string | undefined): Promise<Employee[]> {
   const supabase = supabaseUtils.createServerClient(cookies())
-  const employeesQuery = supabase.from("employees").select(
+  let employeesQuery = supabase.from("employees").select(
     "id, first_name, last_name, salary, email, bonus, jobs(id, name), departments(id, name), start_date, manager_id(first_name, last_name), equity")
+  if(jobId) {
+    employeesQuery.eq("job_id", jobId)
+  }
   const { data, error } = await employeesQuery.returns<JoinedEmployee[]>()
   if (error || !data) {
     console.error(error)
@@ -54,8 +57,10 @@ async function getEmployeeData(): Promise<Employee[]> {
 }
 
 
-export default async function EmployeePage() {
-  const data = await getEmployeeData()
+export default async function EmployeePage({searchParams}: {searchParams: Promise<{ [key: string]: string }>}) {
+  const params = await searchParams
+  const jobId = params["job"]
+  const data = await getEmployeeData(jobId)
 
   return (
     <div className="flex overflow-hidden justify-center">
