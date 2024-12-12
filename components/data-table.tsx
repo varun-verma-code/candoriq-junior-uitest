@@ -47,6 +47,9 @@ export function DataTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
+		defaultColumn: {
+			enableSorting: false, // Override default for enableSorting property from true to false. Set sortable for columns explicitly as needed
+		},
     state: {
       sorting,
 			columnVisibility,

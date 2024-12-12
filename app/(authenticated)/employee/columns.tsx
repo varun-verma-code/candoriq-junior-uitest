@@ -22,22 +22,19 @@ export const columns: CustomColumnDef<Employee, any>[] = [
   {
     accessorKey: "name",
     header: "Name",
-    enableSorting: true,
+    enableSorting: true, // enableSorting is manually set to false by default in data-table.tsx; set property to true when needed.
   },
   {
     accessorKey: "email",
     header: "Email",
-    enableSorting: false,
   },
 	{
     accessorKey: "job_title",
     header: "Job",
-    enableSorting: false,
   },
 	{
     accessorKey: "department",
     header: "Department",
-    enableSorting: false,
   },
 	{
     accessorKey: "equity",
@@ -46,17 +43,14 @@ export const columns: CustomColumnDef<Employee, any>[] = [
       const equity = parseFloat(row.getValue("equity"))
 			return getNumberCell(equity)
     },
-    enableSorting: false,
   },
 	{
     accessorKey: "manager",
     header: "Manager",
-    enableSorting: false,
   },
 	{
     accessorKey: "start_date",
     header: "Start Date",
-    enableSorting: false,
   },
 	{
     accessorKey: "salary",
@@ -75,14 +69,12 @@ export const columns: CustomColumnDef<Employee, any>[] = [
       const salary = parseFloat(row.getValue("bonus"))
 			return getCurrencyCell(salary)
     },
-    enableSorting: false,
   },
   {
     id: "bonus_percent",
     header: "Bonus %",
     accessorFn: (row) => ((row.bonus / row.salary) * 100).toFixed(2),
     cell: ({getValue}) => `${getValue()}%`,
-    enableSorting: false,    
   }
 ]
 
