@@ -39,13 +39,18 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = React.useState([])
+	const [columnVisibility, setColumnVisibility] = React.useState({
+    bonus_percent: false, // Default visibility set to false
+  });
   const table = useReactTable({
     data,
     columns,
     state: {
       sorting,
+			columnVisibility,
     },
     onSortingChange: setSorting,
+		onColumnVisibilityChange: setColumnVisibility,
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
   })
@@ -54,6 +59,21 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md border-y overflow-auto h-[63vh] w-[90vw] relative scroll-auto">
+				<div>
+					<input type="checkbox" id="toggleBonus" name="toggleBonus" value=""
+						onClick={() => {
+							const bonusCol = table.getColumn("bonus")
+							const bonusPercentCol = table.getColumn("bonus_percent")
+							if (bonusPercentCol) {
+								bonusPercentCol.getIsVisible() ? bonusPercentCol.toggleVisibility(false) : bonusPercentCol.toggleVisibility(true)
+							}
+							if (bonusCol) {
+								bonusCol.getIsVisible() ? bonusCol.toggleVisibility(false) : bonusCol.toggleVisibility(true)
+							}
+						}}
+					/>
+					<label htmlFor="toggleBonus" className="text-sm font-normal text-center text-gray-700"> Bonus %</label>
+				</div>
 				<Table>
 					<TableHeader className='sticky top-0 z-10'>
 						{table.getHeaderGroups().map((headerGroup) => (
