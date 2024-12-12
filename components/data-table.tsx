@@ -1,9 +1,13 @@
 "use client"
 
+import { LiaSortSolid, LiaSortUpSolid, LiaSortDownSolid } from "react-icons/lia";
+import React from "react"
+
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
 
@@ -21,13 +25,28 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
 }
 
+/*
+The DataTable is dynamically sorted.
+In order to sort data by a column, set the enableSorting property for colum to true
+The column will dynamically get the styles (pointer, icon) to signify sortable and order or sort
+
+TODO: 
+=====
+1. The header should dynamically be right or left justified based on typeof value
+*/
 export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+	const [sorting, setSorting] = React.useState([])
   const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
   })
 
@@ -44,11 +63,29 @@ export function DataTable<TData, TValue>({
 										<TableHead 
 											key={header.id}
 											className={`${index === 0 ? 'sticky left-0' : ''} bg-secondary`}>
-											{header.isPlaceholder
-												? null
-												: flexRender(
+											{header.isPlaceholder ? null : (
+												// If column is sortable, then assign toggleSortingHandler on-click, and CSS styles
+												<div {...(header.column.getCanSort() ? 
+															{onClick: header.column.getToggleSortingHandler(), className:`flex justify-center cursor-pointer`}
+															: {}
+														)}
+												>
+												{flexRender(
 														header.column.columnDef.header,
 														header.getContext()
+												)}
+												{/* If column is sortable, then add an icon depending on the order or sort */}
+												{header.column.getCanSort() && (
+															<div className="">
+																{{
+																	false: <LiaSortSolid className="align-bottom" />,
+																	asc: <LiaSortUpSolid className="inline-flex" />,
+																	desc: <LiaSortDownSolid className="inline-flex" />,
+																}[header.column.getIsSorted() as string] ?? null}
+															</div>
+												)}
+											</div>
+
 													)}
 										</TableHead>
 									)

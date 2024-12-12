@@ -21,18 +21,22 @@ export const columns: ColumnDef<Employee>[] = [
   {
     accessorKey: "name",
     header: "Name",
+    enableSorting: true,
   },
   {
     accessorKey: "email",
     header: "Email",
+    enableSorting: false,
   },
 	{
     accessorKey: "job_title",
     header: "Job",
+    enableSorting: false,
   },
 	{
     accessorKey: "department",
     header: "Department",
+    enableSorting: false,
   },
 	{
     accessorKey: "equity",
@@ -41,14 +45,17 @@ export const columns: ColumnDef<Employee>[] = [
       const equity = parseFloat(row.getValue("equity"))
 			return getNumberCell(equity)
     },
+    enableSorting: false,
   },
 	{
     accessorKey: "manager",
     header: "Manager",
+    enableSorting: false,
   },
 	{
     accessorKey: "start_date",
     header: "Start Date",
+    enableSorting: false,
   },
 	{
     accessorKey: "salary",
@@ -57,6 +64,7 @@ export const columns: ColumnDef<Employee>[] = [
       const salary = parseFloat(row.getValue("salary"))
 			return getCurrencyCell(salary)
     },
+    enableSorting: true,
   },
 	{
     accessorKey: "bonus",
@@ -65,6 +73,7 @@ export const columns: ColumnDef<Employee>[] = [
       const salary = parseFloat(row.getValue("bonus"))
 			return getCurrencyCell(salary)
     },
+    enableSorting: false,
   }
 ]
 
