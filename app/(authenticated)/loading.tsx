@@ -1,8 +1,9 @@
 import React from 'react'
+import { EmployeeTableSkeleton } from '@/components/skeletons'
 
 const loading = () => {
 	return (
-		<div>loading</div>
+		<EmployeeTableSkeleton/>
 	)
 }
 

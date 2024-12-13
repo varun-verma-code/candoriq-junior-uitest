@@ -4,6 +4,8 @@ import { supabaseUtils } from "@/lib/utils"
 import { Database } from "@/types/supabase"
 import { deprecate } from "util"
 import { cookies } from "next/headers"
+import { Suspense } from "react"
+import { JobTableSkeleton } from "@/components/skeletons"
 
 type JobTable = Database['public']['Tables']['jobs']['Row']
 type JoinedJob = JobTable & {
@@ -31,7 +33,9 @@ export default async function JobPage() {
 
   return (
     <div className="flex overflow-hidden justify-center">
-      <DataTable columns={columns} data={data} />
+      <Suspense fallback={<JobTableSkeleton />}>
+        <DataTable columns={columns} data={data} />
+      </Suspense>      
     </div>
   )
 }

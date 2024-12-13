@@ -19,6 +19,7 @@ export const columns: ColumnDef<Job>[] = [
     header: "Department",
   },
   {
+    // Link to navigate to Employee detail page, to display employees who have that job
     id: "view_employees",
     header: "View Employees",
     cell: ({row}) => {

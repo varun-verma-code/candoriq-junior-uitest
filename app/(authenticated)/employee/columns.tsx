@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils"
 import { ColumnDef } from "@tanstack/react-table"
 import { PropsWithChildren } from "react"
+import { CustomColumnDef } from "@/types/custom-col-def"
 
 export type Employee = {
   id: string
@@ -17,26 +18,23 @@ export type Employee = {
 	equity: number
 }
 
-export const columns: ColumnDef<Employee>[] = [
+export const columns: CustomColumnDef<Employee, any>[] = [
   {
     accessorKey: "name",
     header: "Name",
-    enableSorting: true,
+    enableSorting: true, // enableSorting is manually set to false by default in data-table.tsx; set property to true when needed.
   },
   {
     accessorKey: "email",
     header: "Email",
-    enableSorting: false,
   },
 	{
     accessorKey: "job_title",
     header: "Job",
-    enableSorting: false,
   },
 	{
     accessorKey: "department",
     header: "Department",
-    enableSorting: false,
   },
 	{
     accessorKey: "equity",
@@ -45,17 +43,14 @@ export const columns: ColumnDef<Employee>[] = [
       const equity = parseFloat(row.getValue("equity"))
 			return getNumberCell(equity)
     },
-    enableSorting: false,
   },
 	{
     accessorKey: "manager",
     header: "Manager",
-    enableSorting: false,
   },
 	{
     accessorKey: "start_date",
     header: "Start Date",
-    enableSorting: false,
   },
 	{
     accessorKey: "salary",
@@ -65,6 +60,7 @@ export const columns: ColumnDef<Employee>[] = [
 			return getCurrencyCell(salary)
     },
     enableSorting: true,
+    headerAlignment: "right",
   },
 	{
     accessorKey: "bonus",
@@ -73,14 +69,12 @@ export const columns: ColumnDef<Employee>[] = [
       const salary = parseFloat(row.getValue("bonus"))
 			return getCurrencyCell(salary)
     },
-    enableSorting: false,
   },
   {
     id: "bonus_percent",
-    header: "Bonus %",
+    header: () => (<TextRightHeader>Bonus %</TextRightHeader>),
     accessorFn: (row) => ((row.bonus / row.salary) * 100).toFixed(2),
-    cell: ({getValue}) => `${getValue()}%`,
-    enableSorting: false,    
+    cell: ({getValue}) => (<TextRightHeader>{`${getValue()}%`}</TextRightHeader>),
   }
 ]
 
@@ -90,10 +84,10 @@ function TextRightHeader ({children, className} : PropsWithChildren<{className?:
 
 function getNumberCell(value: number) {
 	const formatted = new Intl.NumberFormat("en-US").format(value)
-	return <TextRightHeader className="font-medium">{formatted}</TextRightHeader>
+	return <TextRightHeader>{formatted}</TextRightHeader>
 }
 
 function getCurrencyCell(value: number) {
   const formatted = Intl.NumberFormat("en-us", {style: "currency", currency: "USD"}).format(value)
-  return <TextRightHeader className="font-medium">{formatted}</TextRightHeader>
+  return <TextRightHeader>{formatted}</TextRightHeader>
 }
