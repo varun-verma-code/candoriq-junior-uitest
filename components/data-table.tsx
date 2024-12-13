@@ -67,8 +67,8 @@ export function DataTable<TData, TValue>({
 
 
   return (
-		<div className="min-w-full min-h-screen">
-			<div className="flex items-center py-1"> {/* Container for the Search input and toggle button */}
+		<div className="min-w-full h-[80vh] overflow-y-auto">
+		<div className="flex items-center py-1"> {/* Container for the Search input and toggle button */}
 				<input type="text" value={globalFilter} placeholder="Search..." className="border rounded px-3 py-2 w-1/5"
 					onChange={(e) => table.setGlobalFilter(String(e.target.value))}
 				/>
