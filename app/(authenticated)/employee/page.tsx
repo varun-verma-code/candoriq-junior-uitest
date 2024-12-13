@@ -33,7 +33,7 @@ async function getEmployeeData(jobId : string | undefined): Promise<Employee[]> 
   let employeesQuery = supabase.from("employees").select(
     "id, first_name, last_name, salary, email, bonus, jobs(id, name), departments(id, name), start_date, manager_id(first_name, last_name), equity")
   if(jobId) {
-    employeesQuery.eq("job_id", jobId)
+    employeesQuery.eq("job_id", jobId) // Filter employees by job_id, if valid job passed in the searchParams
   }
   const { data, error } = await employeesQuery.returns<JoinedEmployee[]>()
   if (error || !data) {

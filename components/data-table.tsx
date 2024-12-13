@@ -61,17 +61,19 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
-    globalFilterFn: "includesString",
+    globalFilterFn: "includesString", // Use case insensitive string search
   })
 
 
 
   return (
-		<div className="min-w-full h-[80vh] overflow-y-auto">
-		<div className="flex items-center py-1"> {/* Container for the Search input and toggle button */}
+		<div className="min-w-full h-[80vh] overflow-y-auto"> {/* Set aside some space at the bottom for pagination if needed */}
+			<div className="flex items-center py-1"> {/* Container for the Search input and toggle button */}
+				{/* Search field */}
 				<input type="text" value={globalFilter} placeholder="Search..." className="border rounded px-3 py-2 w-1/5"
 					onChange={(e) => table.setGlobalFilter(String(e.target.value))}
 				/>
+				{/* Bonus $|% toggle. Display only if bonus column contained in table  */}
 				{table.getColumn("bonus") ? (
 					<div className="inline-block p-2 h-10 align-middle">
 						<label className="inline-flex items-center cursor-pointer">
@@ -93,6 +95,7 @@ export function DataTable<TData, TValue>({
 					</div>
 				) : null}
 			</div>
+			{/* TanStack table */}
 			<div className="rounded-md border-y overflow-auto relative scroll-auto"> {/* Container for the display table */}
 				<Table>
 					<TableHeader className='sticky top-0 z-10'>
@@ -132,8 +135,7 @@ export function DataTable<TData, TValue>({
 															</div>
 												)}
 											</div>
-
-													)}
+											)}
 										</TableHead>
 									)
 								})}
