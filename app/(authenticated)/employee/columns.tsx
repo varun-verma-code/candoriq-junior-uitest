@@ -72,9 +72,9 @@ export const columns: CustomColumnDef<Employee, any>[] = [
   },
   {
     id: "bonus_percent",
-    header: "Bonus %",
+    header: () => (<TextRightHeader>Bonus %</TextRightHeader>),
     accessorFn: (row) => ((row.bonus / row.salary) * 100).toFixed(2),
-    cell: ({getValue}) => `${getValue()}%`,
+    cell: ({getValue}) => (<TextRightHeader>{`${getValue()}%`}</TextRightHeader>),
   }
 ]
 
@@ -84,10 +84,10 @@ function TextRightHeader ({children, className} : PropsWithChildren<{className?:
 
 function getNumberCell(value: number) {
 	const formatted = new Intl.NumberFormat("en-US").format(value)
-	return <TextRightHeader className="font-medium">{formatted}</TextRightHeader>
+	return <TextRightHeader>{formatted}</TextRightHeader>
 }
 
 function getCurrencyCell(value: number) {
   const formatted = Intl.NumberFormat("en-us", {style: "currency", currency: "USD"}).format(value)
-  return <TextRightHeader className="font-medium">{formatted}</TextRightHeader>
+  return <TextRightHeader>{formatted}</TextRightHeader>
 }
